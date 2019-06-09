@@ -9,12 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
-
-//    @Query("SELECT m FROM Menu m JOIN FETCH m.dish WHERE m.id = ?1 and m.user.id = ?2")
-    @Query("SELECT m FROM Menu m LEFT JOIN FETCH m.dish LEFT JOIN FETCH m.restaurant")
-    List<Menu> getAll();
-
-//    @Query("SELECT m FROM Menu m JOIN FETCH m.dish WHERE m.id = ?1 and m.user.id = ?2")
+    
     @Query("SELECT m FROM Menu m LEFT JOIN FETCH m.dish LEFT JOIN FETCH m.restaurant WHERE m.date=?1")
     List<Menu> getAllByDate(@Param("date") LocalDate date);
 }

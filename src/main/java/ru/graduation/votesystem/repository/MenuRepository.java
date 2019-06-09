@@ -7,8 +7,6 @@ import java.util.List;
 
 public interface MenuRepository {
 
-    List<Menu> getAll();
-
     List<Menu> getAllByDate(LocalDate date);
 
 }
