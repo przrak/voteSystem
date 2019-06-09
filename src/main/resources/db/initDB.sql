@@ -50,5 +50,6 @@ CREATE TABLE menus
     date          TIMESTAMP           DEFAULT now() NOT NULL,
     FOREIGN KEY (dish_id) REFERENCES dishes ON DELETE CASCADE,
     FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
-)
+);
+CREATE UNIQUE INDEX menus_dish_restaurant_date_idx ON menus (dish_id, restaurant_id, date);
 
