@@ -53,3 +53,13 @@ CREATE TABLE menus
 );
 CREATE UNIQUE INDEX menus_dish_restaurant_date_idx ON menus (dish_id, restaurant_id, date);
 
+CREATE TABLE votes
+(
+    id            INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+    user_id       INTEGER                           NOT NULL,
+    restaurant_id INTEGER                           NOT NULL,
+    date          TIMESTAMP           DEFAULT now() NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
+)
+
