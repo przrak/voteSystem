@@ -15,6 +15,16 @@ public class MenuRepositoryImpl implements MenuRepository {
     private CrudMenuRepository crudRepository;
 
     @Override
+    public Menu save(Menu menu) {
+        return null;
+    }
+
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
+
+    @Override
     public List<Menu> getAllByDate(LocalDate date) {
         return crudRepository.getAllByDate(date);
     }
