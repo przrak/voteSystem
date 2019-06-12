@@ -8,9 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.graduation.votesystem.model.Vote;
-import ru.graduation.votesystem.repository.RestaurantRepository;
-import ru.graduation.votesystem.repository.UserRepository;
-import ru.graduation.votesystem.repository.VoteRepository;
 import ru.graduation.votesystem.service.VoteService;
 import ru.graduation.votesystem.to.BaseTo;
 import ru.graduation.votesystem.to.VoteTo;
@@ -19,7 +16,6 @@ import ru.graduation.votesystem.util.exception.IllegalRequestDataException;
 
 import java.net.URI;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 

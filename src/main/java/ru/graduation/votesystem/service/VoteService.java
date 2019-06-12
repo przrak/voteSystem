@@ -1,10 +1,8 @@
 package ru.graduation.votesystem.service;
 
 import org.springframework.transaction.annotation.Transactional;
-import ru.graduation.votesystem.model.User;
 import ru.graduation.votesystem.model.Vote;
 import ru.graduation.votesystem.to.BaseTo;
-import ru.graduation.votesystem.util.exception.NotFoundException;
 
 import java.time.LocalDate;
 import java.util.List;

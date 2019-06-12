@@ -22,11 +22,6 @@ public class MenuRestController {
     @Autowired
     private MenuRepository repository;
 
-//    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-//    public List<Menu> get() {
-//        return repository.getAll();
-//    }
-
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<MenuTo> getByDate(@RequestParam(value = "date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return MenuUtils.asToList(repository.getAllByDate(date));

@@ -12,7 +12,6 @@ public class VoteUtils {
     private VoteUtils() {}
 
     public static List<VoteTo> asToList(List<Vote> votes) {
-        System.out.println(votes);
         List<VoteTo> votesTo = new ArrayList<>();
         int allUsers = votes.size();
 
@@ -21,7 +20,7 @@ public class VoteUtils {
 
         for (Map.Entry<String, Long> value : voteResults.entrySet())
         {
-            votesTo.add(new VoteTo(null, null, value.getKey(), calculatePercentage(value.getValue(), allUsers)));
+            votesTo.add(new VoteTo(null, value.getKey(), calculatePercentage(value.getValue(), allUsers)));
         }
         
         return votesTo;
