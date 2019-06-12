@@ -2,7 +2,7 @@ package ru.graduation.votesystem.to;
 
 import ru.graduation.votesystem.HasId;
 
-public abstract class BaseTo implements HasId {
+public class BaseTo implements HasId {
     protected Integer id;
 
     public BaseTo() {

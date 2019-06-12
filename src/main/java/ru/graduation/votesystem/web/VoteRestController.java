@@ -3,42 +3,75 @@ package ru.graduation.votesystem.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.graduation.votesystem.model.Vote;
+import ru.graduation.votesystem.repository.RestaurantRepository;
+import ru.graduation.votesystem.repository.UserRepository;
 import ru.graduation.votesystem.repository.VoteRepository;
+import ru.graduation.votesystem.service.VoteService;
+import ru.graduation.votesystem.to.BaseTo;
+import ru.graduation.votesystem.to.VoteTo;
+import ru.graduation.votesystem.util.VoteUtils;
+import ru.graduation.votesystem.util.exception.IllegalRequestDataException;
 
+import java.net.URI;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
+
+import static ru.graduation.votesystem.web.SecurityUtil.authUserId;
 
 @RestController
 @RequestMapping(value = VoteRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class VoteRestController {
     static final String REST_URL = "/rest/votes";
+    private static final LocalTime time = LocalTime.of(11, 0);
 
     @Autowired
-    private VoteRepository repository;
+    private VoteService voteService;
 
-//    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<User> createWithLocation(@RequestBody User user) {
-//        User created = super.create(user);
-//        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-//                .path(REST_URL + "/{id}")
-//                .buildAndExpand(created.getId()).toUri();
-//        return ResponseEntity.created(uriOfNewResource).body(created);
-//
-//        /*
-//            передать
-//            user_id
-//            restraunt_id
-//            date
-//         */
-//    }
+    @Transactional
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Vote> createWithLocation(@RequestBody BaseTo baseTo) {
+
+        //Чтобы можно было создавать\изменять голос ТОЛЬКО на текущую дату, не передаю ее в параметре
+        LocalDate date = LocalDate.now();
+        Vote vote;
+
+        if (voteService.getByUserIdAndDate(date, authUserId()) != null)
+        {
+            if (LocalTime.now().isAfter(time))
+            {
+                vote = voteService.update(baseTo, authUserId(), date);
+            }
+            else
+            {
+                throw new IllegalRequestDataException("It is too late, vote can't be changed");
+            }
+        }
+        else
+        {
+            //create
+            vote = voteService.create(baseTo, authUserId(), date);
+        }
+
+        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path(REST_URL + "/{id}")
+                .buildAndExpand(vote.getId()).toUri();
+
+        return ResponseEntity.created(uriOfNewResource).body(vote);
+    }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Vote> getByDate(@RequestParam(value = "date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        return repository.getAllByDate(date);
+    public List<VoteTo> getByDate(@RequestParam(value = "date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        List<VoteTo> votes = VoteUtils.asToList(voteService.getAllByDate(date));
+        if (votes.size() == 0)
+            throw new IllegalRequestDataException("No vote data for today");
+
+        return votes;
     }
 }

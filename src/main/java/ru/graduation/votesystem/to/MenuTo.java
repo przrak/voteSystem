@@ -4,18 +4,15 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-public class MenuTo extends BaseTo {
+public class MenuTo extends NamedTo {
 
-    LocalDate date;
+    private LocalDate date;
 
-    String restrauntName;
+    private List<DishTo> dishes;
 
-    List<DishTo> dishes;
-
-    public MenuTo(Integer id, LocalDate date, String restrauntName, List<DishTo> dishes) {
-        super(id);
+    public MenuTo(Integer id, LocalDate date, String restaurantName, List<DishTo> dishes) {
+        super(id, restaurantName);
         this.date = date;
-        this.restrauntName = restrauntName;
         this.dishes = dishes;
     }
 
@@ -35,26 +32,18 @@ public class MenuTo extends BaseTo {
         this.date = date;
     }
 
-    public String getRestrauntName() {
-        return restrauntName;
-    }
-
-    public void setRestrauntName(String restrauntName) {
-        this.restrauntName = restrauntName;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MenuTo menuTo = (MenuTo) o;
         return date.equals(menuTo.date) &&
-                restrauntName.equals(menuTo.restrauntName) &&
+                name.equals(menuTo.name) &&
                 dishes.equals(menuTo.dishes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(date, restrauntName, dishes);
+        return Objects.hash(date, name, dishes);
     }
 }

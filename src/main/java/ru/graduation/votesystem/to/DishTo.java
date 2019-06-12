@@ -3,14 +3,20 @@ package ru.graduation.votesystem.to;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class DishTo extends BaseTo {
+public class DishTo extends NamedTo {
 
-    public String name;
-    public BigDecimal price;
+    private BigDecimal price;
 
     public DishTo(Integer id, String name, BigDecimal price) {
-        super(id);
-        this.name = name;
+        super(id, name);
+        this.price = price;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

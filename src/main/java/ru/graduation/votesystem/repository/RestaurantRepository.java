@@ -7,4 +7,6 @@ public interface RestaurantRepository {
 
     // false if not found
     boolean delete(int id);
+
+    Restaurant getOne(int id);
 }

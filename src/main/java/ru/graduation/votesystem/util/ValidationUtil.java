@@ -1,8 +1,12 @@
 package ru.graduation.votesystem.util;
 
 
+import org.springframework.validation.FieldError;
 import ru.graduation.votesystem.model.AbstractBaseEntity;
 import ru.graduation.votesystem.util.exception.NotFoundException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ValidationUtil {
 
@@ -52,5 +56,24 @@ public class ValidationUtil {
             result = cause;
         }
         return result;
+    }
+
+    public static List<String> getErrorResponse(List<FieldError> errors) {
+        List<String> listErrors = new ArrayList<>();
+        errors.forEach(
+                fe -> {
+                    String msg = fe.getDefaultMessage();
+                    if (msg != null) {
+                        if (!msg.startsWith(fe.getField())) {
+                            msg = fe.getField() + ' ' + msg;
+                        }
+                        listErrors.add(msg);
+                    }
+                });
+        return listErrors;
+    }
+
+    public static String getMessage(Throwable e) {
+        return e.getLocalizedMessage() != null ? e.getLocalizedMessage() : e.getClass().getName();
     }
 }

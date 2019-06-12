@@ -13,31 +13,31 @@ public class MenuUtils {
     private MenuUtils() {
     }
 
-    public static List<MenuTo> asToList(List<Menu> menu) {
-        System.out.println(menu);
+    public static List<MenuTo> asToList(List<Menu> menus) {
+        System.out.println(menus);
 
         List<MenuTo> menuTos = new ArrayList<>();
 
         Map<String, List<DishTo>> mapDish = new HashMap<>();
 
-        menu.forEach(
+        menus.forEach(
                 e -> {
-                    List<DishTo> dto;
+                    List<DishTo> dishesTo;
                     if (mapDish.containsKey(e.getRestaurant().getName())) {
-                        dto = mapDish.get(e.getRestaurant().getName());
+                        dishesTo = mapDish.get(e.getRestaurant().getName());
                     } else {
-                        dto = new ArrayList<>();
+                        dishesTo = new ArrayList<>();
                         menuTos.add(new MenuTo(e.getRestaurant().getId(), e.getDate(),
                                 e.getRestaurant().getName(), null));
                     }
-                    dto.add(new DishTo(e.getDish().getId(), e.getDish().getName(),
+                    dishesTo.add(new DishTo(e.getDish().getId(), e.getDish().getName(),
                             e.getDish().getPrice()));
-                    mapDish.put(e.getRestaurant().getName(), dto);
+                    mapDish.put(e.getRestaurant().getName(), dishesTo);
                 }
         );
 
         for (MenuTo menuTo : menuTos) {
-            menuTo.setDishes(mapDish.get(menuTo.getRestrauntName()));
+            menuTo.setDishes(mapDish.get(menuTo.getName()));
         }
 
         return menuTos;
