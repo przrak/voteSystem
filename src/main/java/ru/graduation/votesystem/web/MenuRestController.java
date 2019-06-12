@@ -31,5 +31,4 @@ public class MenuRestController {
     public List<MenuTo> getByDate(@RequestParam(value = "date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return MenuUtils.asToList(repository.getAllByDate(date));
     }
-
 }
