@@ -40,7 +40,7 @@ public class VoteRestController {
 
         if (voteService.getByUserIdAndDate(date, authUserId()) != null)
         {
-            if (LocalTime.now().isAfter(time))
+            if (LocalTime.now().isBefore(time))
             {
                 vote = voteService.update(baseTo, authUserId(), date);
             }
