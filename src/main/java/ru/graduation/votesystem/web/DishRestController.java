@@ -1,4 +1,4 @@
-package ru.graduation.votesystem.web.admin;
+package ru.graduation.votesystem.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
