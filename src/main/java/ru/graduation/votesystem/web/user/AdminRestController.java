@@ -56,18 +56,4 @@ public class AdminRestController extends AbstractUserController {
     public User getByMail(@RequestParam String email) {
         return super.getByMail(email);
     }
-
-    //добавить ресторан
-    //редактировать ресторан
-    //удалить ресторан
-
-    //добавить меню для ресторана
-    //редактировать меню для ресторана
-    //удалить 
-
-    //добавить блюдо в меню
-    //редактировать блюдо
-    //
-
-
 }
