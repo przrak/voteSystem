@@ -7,10 +7,8 @@ import java.util.List;
 public interface DishRepository {
     Dish save(Dish dish);
 
-    // false if not found
     void delete(int id);
 
-    // null if not found
     Dish get(int id);
 
     List<Dish> getAll();

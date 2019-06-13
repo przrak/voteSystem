@@ -6,14 +6,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface MenuRepository {
-
-
     Menu save(Menu menu);
 
-    // false if not found
-    boolean delete(int id);
-
+    void delete(int id);
 
     List<Menu> getAllByDate(LocalDate date);
-
 }

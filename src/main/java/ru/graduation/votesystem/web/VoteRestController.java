@@ -42,20 +42,14 @@ public class VoteRestController {
         LocalDate date = LocalDate.now();
         Vote vote;
 
-        if (voteService.getByUserIdAndDate(date, authUserId()) != null)
-        {
-            if (LocalTime.now().isBefore(time))
-            {
+        if (voteService.getByUserIdAndDate(date, authUserId()) != null) {
+            if (LocalTime.now().isBefore(time)) {
                 log.info("update vote for restaurant {}", baseTo.getId());
                 vote = voteService.update(baseTo, authUserId(), date);
-            }
-            else
-            {
+            } else {
                 throw new IllegalRequestDataException("It is too late, vote can't be changed");
             }
-        }
-        else
-        {
+        } else {
             //create
             log.info("create new vote for restaurant {}", baseTo.getId());
             vote = voteService.create(baseTo, authUserId(), date);
@@ -71,10 +65,7 @@ public class VoteRestController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<VoteTo> getByDate(@RequestParam(value = "date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         log.info("getVoteByDate {}", date);
-        List<VoteTo> votes = VoteUtils.asToList(voteService.getAllByDate(date));
-        if (votes.isEmpty())
-            throw new IllegalRequestDataException("No vote data for today");
 
-        return votes;
+        return VoteUtils.asToList(voteService.getAllByDate(date));
     }
 }
