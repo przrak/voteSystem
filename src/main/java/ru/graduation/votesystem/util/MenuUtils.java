@@ -14,8 +14,6 @@ public class MenuUtils {
     }
 
     public static List<MenuTo> asToList(List<Menu> menus) {
-        System.out.println(menus);
-
         List<MenuTo> menuTos = new ArrayList<>();
 
         Map<String, List<DishTo>> mapDish = new HashMap<>();

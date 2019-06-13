@@ -26,7 +26,7 @@ public class VoteUtils {
         return votesTo;
     }
 
-    private static Double calculatePercentage(double obtained, double total) {
-        return obtained * 100 / total;
+    private static long calculatePercentage(double obtained, double total) {
+        return Math.round(obtained * 100 / total);
     }
 }

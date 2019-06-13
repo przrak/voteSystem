@@ -4,18 +4,18 @@ import java.util.Objects;
 
 public class VoteTo extends NamedTo {
 
-    private Double percentVotes;
+    private Long percentVotes;
 
-    public VoteTo(Integer id, String restaurantName, Double percentVotes) {
+    public VoteTo(Integer id, String restaurantName, Long percentVotes) {
         super(id, restaurantName);
         this.percentVotes = percentVotes;
     }
 
-    public Double getPercentVotes() {
+    public Long getPercentVotes() {
         return percentVotes;
     }
 
-    public void setPercentVotes(Double percentVotes) {
+    public void setPercentVotes(Long percentVotes) {
         this.percentVotes = percentVotes;
     }
 
