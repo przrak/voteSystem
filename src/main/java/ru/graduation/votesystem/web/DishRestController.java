@@ -34,11 +34,7 @@ public class DishRestController {
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Dish get(@PathVariable int id) {
         log.info("get dish {}", id);
-        Dish dish = repository.get(id);
-        if (dish == null)
-            throw new IllegalRequestDataException("Dish not found");
-
-        return dish;
+        return repository.get(id);
     }
 
     @DeleteMapping("/{id}")
