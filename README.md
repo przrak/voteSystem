@@ -44,7 +44,7 @@ curl -X GET \
   -H 'accept-encoding: gzip, deflate' \
   -H 'cache-control: no-cache'
 
-### create Vote
+#### create Vote
 curl -X POST \
   http://localhost:8080/votesystem/rest/votes \
   -H 'Accept: */*' \
@@ -59,8 +59,62 @@ curl -X POST \
   -H 'cache-control: no-cache' \
   -H 'content-length: 15' \
   -d '{"id":"100003"}'
+  
+#### get AllDishes (admin)
+curl -X GET \
+  http://localhost:8080/votesystem/rest/admin/dishes/ \
+  -H 'Accept: */*' \
+  -H 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Host: localhost:8080' \
+  -H 'Postman-Token: 8b4bfd87-27af-42eb-ac0d-4f279c973438,b104a5a4-5687-4aab-ab87-51ddf07c7e7a' \
+  -H 'User-Agent: PostmanRuntime/7.11.0' \
+  -H 'accept-encoding: gzip, deflate' \
+  -H 'cache-control: no-cache'
+  
+#### get Dish by Id (admin)
+curl -X GET \
+  http://localhost:8080/votesystem/rest/admin/dishes/100054 \
+  -H 'Accept: */*' \
+  -H 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Host: localhost:8080' \
+  -H 'Postman-Token: 928f970f-8c25-4243-a47d-0e85afdb6197,e75a1785-bd87-42ed-8ef0-04eb5d10f766' \
+  -H 'User-Agent: PostmanRuntime/7.11.0' \
+  -H 'accept-encoding: gzip, deflate' \
+  -H 'cache-control: no-cache'
+  
+#### delete Dish by Id (admin)
+curl -X DELETE \
+  http://localhost:8080/votesystem/rest/admin/dishes/100054 \
+  -H 'Accept: */*' \
+  -H 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Host: localhost:8080' \
+  -H 'Postman-Token: 9aad668f-cdc7-4e53-b5bd-f4225963f92f,f8e0dbb8-e7a4-443c-894c-f8abca5d0892' \
+  -H 'User-Agent: PostmanRuntime/7.11.0' \
+  -H 'accept-encoding: gzip, deflate' \
+  -H 'cache-control: no-cache' \
+  -H 'content-length: '
+  
+#### delete Menu by Id (admin)
+curl -X DELETE \
+  http://localhost:8080/votesystem/rest/admin/menus/100065 \
+  -H 'Accept: */*' \
+  -H 'Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Host: localhost:8080' \
+  -H 'Postman-Token: a79a30ce-5742-4729-87f0-fb041259166e,7b73f43d-7887-48e7-a4a7-12560f62dfbb' \
+  -H 'User-Agent: PostmanRuntime/7.11.0' \
+  -H 'accept-encoding: gzip, deflate' \
+  -H 'cache-control: no-cache' \
+  -H 'content-length: '
 
-### create User
+#### create User
 curl -X POST \
   http://localhost:8080/votesystem/rest/admin/users \
   -H 'Content-Type: application/json' \
@@ -68,7 +122,7 @@ curl -X POST \
   -H 'cache-control: no-cache' \
   -d '{"name":"Vasya","email":"test2@gmail.com","password":"password","roles":["ROLE_USER"]}'
   
-### get allUser
+#### get allUser
 curl -X GET \
   http://localhost:8080/votesystem/rest/admin/users \
   -H 'Accept: */*' \
@@ -83,7 +137,7 @@ curl -X GET \
   -H 'cookie: JSESSIONID=8896FB6BB637DDA040E6232A1CDF171E' \
   -b JSESSIONID=8896FB6BB637DDA040E6232A1CDF171E
   
-### get User by email
+#### get User by email
 curl -X GET \
   'http://localhost:8080/votesystem/rest/admin/users/by?email=user@yandex.ru' \
   -H 'Accept: */*' \
@@ -98,7 +152,7 @@ curl -X GET \
   -H 'cookie: JSESSIONID=8896FB6BB637DDA040E6232A1CDF171E' \
   -b JSESSIONID=8896FB6BB637DDA040E6232A1CDF171E
   
-  ### delete User by Id
+  #### delete User by Id
   curl -X DELETE \
   http://localhost:8080/votesystem/rest/admin/users/100000 \
   -H 'Accept: */*' \
@@ -114,7 +168,7 @@ curl -X GET \
   -H 'cookie: JSESSIONID=8896FB6BB637DDA040E6232A1CDF171E' \
   -b JSESSIONID=8896FB6BB637DDA040E6232A1CDF171E
   
-  ### update User by Id
+  #### update User by Id
   curl -X PUT \
   http://localhost:8080/votesystem/rest/admin/users/100000 \
   -H 'Content-Type: application/json' \
@@ -122,7 +176,7 @@ curl -X GET \
   -H 'cache-control: no-cache' \
   -d '{"name":"UpdatedName","email":"user1@yandex.ru","password":"testtt","roles":["ROLE_ADMIN"]}'
   
-  ### get User by Id
+  #### get User by Id
   curl -X GET \
   http://localhost:8080/votesystem/rest/admin/users/100001 \
   -H 'Accept: */*' \
