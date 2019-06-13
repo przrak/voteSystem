@@ -8,6 +8,7 @@ import ru.graduation.votesystem.model.Vote;
 import java.time.LocalDate;
 import java.util.List;
 
+@Transactional(readOnly = true)
 public interface CrudVoteRepository extends JpaRepository<Vote, Integer> {
 
     @Override
