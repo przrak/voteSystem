@@ -21,7 +21,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-import static ru.graduation.votesystem.util.ValidationUtil.checkNew;
 import static ru.graduation.votesystem.web.SecurityUtil.authUserId;
 
 @RestController

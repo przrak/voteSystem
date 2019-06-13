@@ -2,6 +2,7 @@ package ru.graduation.votesystem.repository.datajpa;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.Assert;
 import ru.graduation.votesystem.model.Dish;
 import ru.graduation.votesystem.repository.DishRepository;
 
@@ -17,6 +18,7 @@ public class DishRepositoryImpl implements DishRepository {
 
     @Override
     public Dish save(Dish dish) {
+        Assert.notNull(dish, "dish must not be null");
         return crudRepository.save(dish);
     }
 
