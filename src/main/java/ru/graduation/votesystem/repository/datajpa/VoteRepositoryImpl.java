@@ -26,8 +26,7 @@ public class VoteRepositoryImpl implements VoteRepository {
 
     @Override
     public Vote getByUserIdAndDate(LocalDate date, int userId) {
-        return checkNotFoundWithId(crudRepository.getByUserIdAndDate(date, userId),
-                userId);
+        return crudRepository.getByUserIdAndDate(date, userId);
     }
 
     @Override
