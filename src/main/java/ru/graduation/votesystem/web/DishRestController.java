@@ -8,7 +8,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.graduation.votesystem.model.Dish;
 import ru.graduation.votesystem.repository.DishRepository;
-import ru.graduation.votesystem.util.exception.IllegalRequestDataException;
 
 import java.util.List;
 
@@ -24,11 +23,7 @@ public class DishRestController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Dish> getAll() {
         log.info("getAll for dishes");
-        List<Dish> dishes = repository.getAll();
-        if (dishes.isEmpty())
-            throw new IllegalRequestDataException("Dishes dictionary is empty");
-
-        return dishes;
+        return repository.getAll();
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
