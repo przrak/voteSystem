@@ -1,5 +1,7 @@
 # voteSystem
 
+Меню заполнено с 10.06.2019 по 15.06.2019
+
 ### curl samples (application deployed in application context `votesystem`).
 > For windows use `Git Bash`
 
