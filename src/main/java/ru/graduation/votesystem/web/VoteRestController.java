@@ -65,7 +65,7 @@ public class VoteRestController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<VoteTo> getByDate(@RequestParam(value = "date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         List<VoteTo> votes = VoteUtils.asToList(voteService.getAllByDate(date));
-        if (votes.size() == 0)
+        if (votes.isEmpty())
             throw new IllegalRequestDataException("No vote data for today");
 
         return votes;

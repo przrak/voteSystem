@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.graduation.votesystem.repository.MenuRepository;
 import ru.graduation.votesystem.to.MenuTo;
 import ru.graduation.votesystem.util.MenuUtils;
+import ru.graduation.votesystem.util.exception.IllegalRequestDataException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -24,6 +25,10 @@ public class MenuRestController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<MenuTo> getByDate(@RequestParam(value = "date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        return MenuUtils.asToList(repository.getAllByDate(date));
+        List<MenuTo> menus = MenuUtils.asToList(repository.getAllByDate(date));
+        if (menus.isEmpty())
+            throw new IllegalRequestDataException("No menu on this data");
+        
+        return menus;
     }
 }
