@@ -5,12 +5,19 @@ import org.springframework.validation.FieldError;
 import ru.graduation.votesystem.model.AbstractBaseEntity;
 import ru.graduation.votesystem.util.exception.NotFoundException;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ValidationUtil {
 
     private ValidationUtil() {
+    }
+
+    public static <T> List<T> checkNotFoundWithDate(List<T> listObjects, LocalDate id) {
+        if (listObjects.isEmpty())
+            return checkNotFound(null, "date=" + id.toString());
+        return listObjects;
     }
 
     public static <T> T checkNotFoundWithId(T object, int id) {

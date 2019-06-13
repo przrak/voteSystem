@@ -10,6 +10,8 @@ import ru.graduation.votesystem.repository.MenuRepository;
 import java.time.LocalDate;
 import java.util.List;
 
+import static ru.graduation.votesystem.util.ValidationUtil.checkNotFoundWithDate;
+
 @Repository
 public class MenuRepositoryImpl implements MenuRepository {
 
@@ -31,6 +33,6 @@ public class MenuRepositoryImpl implements MenuRepository {
     @Cacheable("menus")
     @Override
     public List<Menu> getAllByDate(LocalDate date) {
-        return crudRepository.getAllByDate(date);
+        return checkNotFoundWithDate(crudRepository.getAllByDate(date), date);
     }
 }
