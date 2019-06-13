@@ -7,6 +7,8 @@ import ru.graduation.votesystem.repository.DishRepository;
 
 import java.util.List;
 
+import static ru.graduation.votesystem.util.ValidationUtil.checkNotFoundWithId;
+
 @Repository
 public class DishRepositoryImpl implements DishRepository {
 
@@ -19,13 +21,13 @@ public class DishRepositoryImpl implements DishRepository {
     }
 
     @Override
-    public boolean delete(int id) {
-        return crudRepository.delete(id) != 0;
+    public void delete(int id) {
+        checkNotFoundWithId(crudRepository.delete(id) != 0, id);
     }
 
     @Override
     public Dish get(int id) {
-        return crudRepository.findById(id).orElse(null);
+        return checkNotFoundWithId(crudRepository.findById(id).orElse(null), id);
     }
 
     @Override
