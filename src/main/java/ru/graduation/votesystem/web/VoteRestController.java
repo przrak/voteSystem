@@ -1,5 +1,7 @@
 package ru.graduation.votesystem.web;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
@@ -19,6 +21,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+import static ru.graduation.votesystem.util.ValidationUtil.checkNew;
 import static ru.graduation.votesystem.web.SecurityUtil.authUserId;
 
 @RestController
@@ -26,6 +29,8 @@ import static ru.graduation.votesystem.web.SecurityUtil.authUserId;
 public class VoteRestController {
     static final String REST_URL = "/rest/votes";
     private static final LocalTime time = LocalTime.of(11, 0);
+
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private VoteService voteService;
@@ -42,6 +47,7 @@ public class VoteRestController {
         {
             if (LocalTime.now().isBefore(time))
             {
+                log.info("update vote for restaurant {}", baseTo.getId());
                 vote = voteService.update(baseTo, authUserId(), date);
             }
             else
@@ -52,6 +58,7 @@ public class VoteRestController {
         else
         {
             //create
+            log.info("create new vote for restaurant {}", baseTo.getId());
             vote = voteService.create(baseTo, authUserId(), date);
         }
 
@@ -64,6 +71,7 @@ public class VoteRestController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<VoteTo> getByDate(@RequestParam(value = "date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        log.info("getVoteByDate {}", date);
         List<VoteTo> votes = VoteUtils.asToList(voteService.getAllByDate(date));
         if (votes.isEmpty())
             throw new IllegalRequestDataException("No vote data for today");
