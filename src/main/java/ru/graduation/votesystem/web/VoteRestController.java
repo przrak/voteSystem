@@ -34,7 +34,6 @@ public class VoteRestController {
     @Autowired
     private VoteService voteService;
 
-    @Transactional
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Vote> createWithLocation(@RequestBody BaseTo baseTo) {
 

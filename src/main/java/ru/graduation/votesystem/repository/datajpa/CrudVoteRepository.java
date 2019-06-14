@@ -15,7 +15,7 @@ public interface CrudVoteRepository extends JpaRepository<Vote, Integer> {
     @Transactional
     Vote save(Vote user);
 
-    @Query("SELECT v FROM Vote v LEFT JOIN FETCH v.user LEFT JOIN FETCH v.restaurant WHERE v.date=?1")
+    @Query("SELECT v FROM Vote v LEFT JOIN FETCH v.restaurant WHERE v.date=?1")
     List<Vote> getAllByDate(LocalDate date);
 
     @Query("SELECT v FROM Vote v LEFT JOIN FETCH v.user LEFT JOIN FETCH v.restaurant WHERE v.date=?1 " +
